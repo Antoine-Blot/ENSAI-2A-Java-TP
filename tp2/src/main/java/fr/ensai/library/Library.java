@@ -8,6 +8,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import java.util.ArrayList;
+
 /**
  * Represents a library.
  */
@@ -25,11 +27,27 @@ public class Library {
         this.books = books;
     }
 
+    public Library(String name) {
+        this.name = name;
+        this.books = new ArrayList<>();
+    }
+
     /**
      * Adds a book.
      */
     public void addBook(Book book) {
         this.books.add(book);
+    }
+
+    public void displayBooks() {
+        if (this.books.isEmpty()) {
+            System.out.println("No book in the library.");
+            return;
+        }
+        System.out.println("Books in the library:");
+        for (Book book : books) {
+            System.out.println(book.toString());
+        }
     }
 
     /**
