@@ -40,14 +40,7 @@ public class Password {
      */
     public static String bruteForce6Digit(String targetHash) {
 
-        for (int i = 0; i <= 999999; i++) {
-            String password = String.valueOf(i);
-            if (hashPassword(password).equals(targetHash)) {
-                return password;
-            }
-        }
-
-
+        // Code here
 
         return null;
     }
@@ -68,32 +61,9 @@ public class Password {
      */
     public static boolean isStrongPassword(String password) {
 
-        boolean isLongEnough = password.length() >= 12;
+        // Code here
 
-        boolean hasUpper = false;
-        boolean hasLower = false;
-        boolean hasDigit = false;
-        boolean hasWhitespace = false;
-
-        for (int i = 0; i < password.length(); i++) {
-            char c = password.charAt(i);
-
-            if (Character.isUpperCase(c)) {
-                hasUpper = true;
-            }
-            else if (Character.isLowerCase(c)) {
-                hasLower = true;
-            }
-            else if (Character.isDigit(c)) {
-                hasDigit = true;
-            }
-            else if (Character.isWhitespace(c)) {
-                hasWhitespace = true;
-            }
-        }
-
-        return isLongEnough && hasUpper && hasLower && hasDigit && !hasWhitespace;
-
+        return false;
     }
 
     /**
