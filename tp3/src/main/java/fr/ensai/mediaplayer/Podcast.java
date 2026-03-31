@@ -7,10 +7,9 @@ public class Podcast extends Media {
     private int year;
 
     public Podcast(String title, String host, String topic, int duration, int year, String subtitles) {
-        super(title, subtitles);
+        super(title, subtitles, duration);
         this.host = host;
         this.topic = topic;
-        this.duration = duration;
         this.year = year;
     }
 

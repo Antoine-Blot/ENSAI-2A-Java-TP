@@ -8,10 +8,16 @@ import java.util.Objects;
 public abstract class Media {
     protected String title;
     protected String content;
+    protected int duration;
 
-    protected Media(String title, String content) {
+    protected Media(String title, String content, int duration) {
         this.title = title;
         this.content = content;
+        this.duration = duration;
+    }
+
+    public int getDuration() {
+        return this.duration;
     }
 
     public void play() {

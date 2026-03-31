@@ -40,6 +40,10 @@ public class Song {
         this.genres = genres;
     }
 
+    public int getDuration() {
+        return this.duration;
+    }
+
     public void play() {
         String[] words = lyrics.split(" ");
 
