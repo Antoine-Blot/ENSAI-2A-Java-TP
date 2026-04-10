@@ -16,6 +16,8 @@ public class Person {
 
     private static Random random = new Random();
 
+    static final int nbFloors = Config.getInt("hotel.floors.count");
+
     /**
      * Constructs a new Person starting at the specified floor.
      * 
@@ -24,7 +26,7 @@ public class Person {
     public Person(int startFloor) {
         this.nickname = Person.generateNickname();
         this.startFloor = startFloor;
-        this.targetFloor = Person.generateTargetFloor();
+        this.targetFloor = generateTargetFloor();
     }
 
     /**
@@ -39,12 +41,20 @@ public class Person {
     }
 
     /**
-     * Generates a random target floor.
+     * Generates a random target floor that is not the current floor.
      * 
      * @return the target floor number
      */
-    private static int generateTargetFloor() {
-        return random.nextInt(4);
+    private int generateTargetFloor() {
+        if (nbFloors == 1) {
+            return 0;
+        }
+
+        int n = startFloor;
+        while (n == startFloor) {
+            n = random.nextInt(nbFloors - 1);
+        }
+        return n;
     }
 
     public String getNickname() {

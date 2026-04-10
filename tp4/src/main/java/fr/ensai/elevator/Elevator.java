@@ -129,7 +129,7 @@ public class Elevator {
      */
     public void loadPassengers(Floor floor) {
 
-        while (this.passengers.size() < this.capacity) {
+        while (!isFull()) {
             Person person = floor.boardNextPerson();
             if (person == null)
                 break;
@@ -145,12 +145,38 @@ public class Elevator {
     }
 
     /**
+     * Adds a number of randomly generated passengers up to the elevator capacity.
+     * Adds their target floors to the destination queue.
+     * 
+     * @param n the number of passengers to add
+     */
+    public void fillWithRandomPassengers(int n) {
+        int i = 0;
+        while (!isFull() && i < n) {
+            Person person = new Person(currentFloor);
+            this.passengers.add(person);
+            this.addDestination(person.getTargetFloor());
+            i += 1;
+        }
+    }
+
+    /**
      * Moves the elevator to the next floor in its destination queue.
      * Removes that floor from the queue.
      */
     public void move() {
         if (!destinationQueue.isEmpty())
             this.currentFloor = destinationQueue.removeFirst();
+    }
+
+    /**
+     * 
+     * Returns whether the elevator is full.
+     * 
+     * @return true if the elevator is full, false otherwise
+     */
+    public boolean isFull() {
+        return passengers.size() >= capacity;
     }
 
     /**
