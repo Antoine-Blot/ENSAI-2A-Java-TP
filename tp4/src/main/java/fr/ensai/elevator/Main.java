@@ -26,14 +26,16 @@ public class Main {
         final int elevatorStartFloor = Config.getInt("hotel.elevators.startFloor");
 
         List<Floor> floors = new ArrayList<>();
-        for (int i = 0; i <= nbFloors - 1; i++) {
+        for (int i = 0; i < nbFloors; i++) {
             floors.add(new Floor(i));
         }
 
         List<Elevator> elevators = new ArrayList<>();
-        for (int i = 0; i <= nbElevators - 1; i++) {
+        // nbElevators includes 1 crazy elevator, which is added after the loop
+        for (int i = 0; i < nbElevators - 1; i++) {
             elevators.add(new Elevator(i, elevatorStartFloor, elevatorCapacity));
         }
+        elevators.add(new CrazyElevator(elevators.size(), elevatorStartFloor, elevatorCapacity));
 
         Hotel hotel = new Hotel(floors, elevators);
 

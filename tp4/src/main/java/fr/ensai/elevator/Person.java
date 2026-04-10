@@ -18,6 +18,8 @@ public class Person {
 
     static final int nbFloors = Config.getInt("hotel.floors.count");
 
+    private Direction direction = Direction.IDLE;
+
     /**
      * Constructs a new Person starting at the specified floor.
      * 
@@ -55,6 +57,15 @@ public class Person {
             n = random.nextInt(nbFloors - 1);
         }
         return n;
+    }
+
+    /**
+     * Updates the direction of the person.
+     * 
+     * @param direction whether the person is going up, down or is idle
+     */
+    public void updateDirection(Direction direction) {
+        this.direction = direction;
     }
 
     public String getNickname() {

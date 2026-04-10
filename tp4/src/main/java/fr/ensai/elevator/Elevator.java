@@ -17,14 +17,15 @@ import org.apache.logging.log4j.Logger;
  */
 public class Elevator {
 
-    private static final Logger logger = LogManager.getLogger(Elevator.class);
+    protected static final Logger logger = LogManager.getLogger(Elevator.class);
 
-    private int id;
-    private int capacity;
-    private int currentFloor;
-    private List<Integer> destinationQueue;
-    private List<Person> passengers;
-    private List<Person> lastUnloaded;
+    protected int id;
+    protected int capacity;
+    protected int currentFloor;
+    protected List<Integer> destinationQueue;
+    protected List<Person> passengers;
+    protected List<Person> lastUnloaded;
+    protected Direction direction = Direction.IDLE;
 
     /**
      * Constructs a new Elevator with the specified parameters.
@@ -122,6 +123,26 @@ public class Elevator {
     }
 
     /**
+     * Determines direction based on the next destination.
+     * Updates the direction of the elevator and its passengers.
+     */
+    private void updateDirection() {
+        if (destinationQueue.isEmpty()) {
+            direction = Direction.IDLE;
+        } else if (destinationQueue.get(0) > currentFloor) {
+            direction = Direction.UP;
+        } else if (destinationQueue.get(0) < currentFloor) {
+            direction = Direction.DOWN;
+        } else {
+            direction = Direction.IDLE;
+        }
+
+        for (Person p : passengers) {
+            p.updateDirection(direction);
+        }
+    }
+
+    /**
      * Loads passengers waiting on the specified floor until the elevator is full.
      * Adds their target floors to the destination queue.
      * 
@@ -142,6 +163,8 @@ public class Elevator {
             this.passengers.add(person);
             this.addDestination(person.getTargetFloor());
         }
+
+        updateDirection();
     }
 
     /**
